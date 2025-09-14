@@ -41,6 +41,10 @@ sub new {
 
 	my $ua = $conf{user_agent};
 
+	if ( defined $service and not exists $hafas_instance->{$service} ) {
+		confess("The service '$service' is not supported");
+	}
+
 	if ( not $ua ) {
 		my %lwp_options = %{ $conf{lwp_options} // { timeout => 10 } };
 		if ( $service and $hafas_instance->{$service}{ua_string} ) {
@@ -77,10 +81,6 @@ sub new {
 
 	if ( not defined $service ) {
 		confess("You must specify a service");
-	}
-
-	if ( defined $service and not exists $hafas_instance->{$service} ) {
-		confess("The service '$service' is not supported");
 	}
 
 	my $now = DateTime->now( time_zone => $hafas_instance->{$service}{time_zone}
