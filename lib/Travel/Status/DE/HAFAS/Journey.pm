@@ -17,7 +17,7 @@ Travel::Status::DE::HAFAS::Journey->mk_ro_accessors(
 	qw(datetime sched_datetime rt_datetime tz_offset
 	  is_additional is_cancelled is_partially_cancelled
 	  station station_eva platform sched_platform rt_platform operator
-	  product product_at
+	  product
 	  id name type type_long class number line line_no load delay
 	  route_end route_start origin destination direction)
 );
