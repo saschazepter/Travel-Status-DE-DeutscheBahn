@@ -805,7 +805,7 @@ sub station {
 	for my $result ( $self->results ) {
 		$eva_count{ $result->station_eva } += 1;
 		$name_count{ $result->station }    += 1;
-		$eva_by_name{ $result->station_eva } = $result->station;
+		$eva_by_name{ $result->station } = $result->station_eva;
 	}
 
 	my @most_frequent_evas = map { $_->[0] } sort { $b->[1] <=> $a->[1] }
