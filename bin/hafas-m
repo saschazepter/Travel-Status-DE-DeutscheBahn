@@ -528,8 +528,13 @@ elsif ( $opt{journey} ) {
 		if ( @prods > 1 ) {
 			my $prod = $stop->prod_dep // $stop->prod_arr;
 			if ( $prod and $prod != $prev_prod ) {
-				$prod_line
-				  = sprintf( " %s (%s)", $prod->name, $prod->operator );
+				if ( $prod->operator ) {
+					$prod_line
+					  = sprintf( " %s (%s)", $prod->name, $prod->operator );
+				}
+				else {
+					$prod_line = q{ } . $prod->name;
+				}
 				$prev_prod = $prod;
 			}
 		}
