@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+VERSION="$1"
+test -n "${VERSION}"
+
+git checkout main
+
+git pull
+git submodule update --init
+
+git checkout "${VERSION}"
+
+docker build --no-cache -t hafas-m:${VERSION} .
+docker build -t hafas-m:latest .
+docker tag hafas-m:${VERSION} derfnull/dbris-m:${VERSION}
+docker tag hafas-m:latest derfnull/dbris-m:latest
+docker push derfnull/hafas-m:${VERSION}
+docker push derfnull/hafas-m:latest
